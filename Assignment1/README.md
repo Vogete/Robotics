@@ -16,6 +16,7 @@
 - Wheel diameter: 43.2mm
 - Wheel width: 22mm
 - Wheel distance: 63mm (From wheel's center to car's center)
+- Motor A is weaker by about 1 degree/sec
 
 ### Route
 
@@ -27,7 +28,11 @@
 ### LeJos (Java API)
 
 - Motor
+	- http://www.lejos.org/p_technologies/nxt/nxj/api/lejos/nxt/Motor.html
 - MovePilot
+	- http://www.lejos.org/ev3/docs/lejos/robotics/navigation/MovePilot.html
 - Navigator
+	- http://www.lejos.org/ev3/docs/lejos/robotics/navigation/Navigator.html
+	
 
 
