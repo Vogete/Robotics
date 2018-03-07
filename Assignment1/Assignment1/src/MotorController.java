@@ -6,8 +6,8 @@ public class MotorController {
 	
 	private static double wheelDiameter = 43.2;
 	private static double wheelDistanceFromCenter = 64;
-	private static double wheelWidth = 22;
-	private static int motorOffset = 1;
+	//private static double wheelWidth = 22;
+	//private static int motorOffset = 1;
 	private static double wheelCircumference = wheelDiameter * Math.PI;
 	private static double distanceBetweenWheels = 128;
 	private static int acceleration = 2000;
@@ -77,8 +77,7 @@ public class MotorController {
 		double circleCircumference = distanceBetweenWheels * Math.PI;
 		double distance =  circleCircumference / (360 / rotationAngle);
 		int degree = calculateDegree(distance);
-		logMessage(Integer.toString(degree));
-		logMessage(Double.toString(distance));
+
 		Motor.A.rotateTo(degree, true);
 		Motor.B.rotateTo(-degree, true);
 		while(Motor.A.isMoving()) Thread.yield();
