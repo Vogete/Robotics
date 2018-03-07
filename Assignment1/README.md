@@ -31,6 +31,8 @@
 	- http://www.lejos.org/p_technologies/nxt/nxj/api/lejos/nxt/Motor.html
 - MovePilot
 	- http://www.lejos.org/ev3/docs/lejos/robotics/navigation/MovePilot.html
+	- `DifferentialChassis` was renamed to `WheeledChassis`
+	- `setRobotSpeed()` was renamed to `setLinearSpeed()` (`setLinearSpeed()`, `setAngularSpeed()`)
 - Navigator
 	- http://www.lejos.org/ev3/docs/lejos/robotics/navigation/Navigator.html
 	
