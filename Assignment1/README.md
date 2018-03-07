@@ -4,10 +4,10 @@
 
 ### Car's design
 
-- https://le-www-live-s.legocdn.com/sc/media/lessons/mindstorms-ev3/building-instructions/ev3-rem-driving-base-79bebfc16bd491186ea9c9069842155e.pdf
+- [Building Instructions](https://le-www-live-s.legocdn.com/sc/media/lessons/mindstorms-ev3/building-instructions/ev3-rem-driving-base-79bebfc16bd491186ea9c9069842155e.pdf)
 - 3 wheeled
   - 2 in the front, not connected (seperate motors)
-- caster wheel in the back
+- caster wheel in the back (custom made)
 - Car's width: 150mm (From wheel to wheel)
 
 ### Wheel
@@ -21,23 +21,23 @@
 ### Route
 
 - Distance: 2585mm
-- https://www.draw.io/#G1TtzG6nARdbF-WI7Pv5NPwUEFM1Ta0G-3
+- [Planned Route](https://www.draw.io/#G1TtzG6nARdbF-WI7Pv5NPwUEFM1Ta0G-3)
 
-Notes:
+Helpful Links:
 
-- http://ev3lessons.com/resources/wheelconverter/
+- [Wheel Converter](http://ev3lessons.com/resources/wheelconverter/)
 
 ## Implementation
 
 ### LeJos (Java API)
 
 - Motor
-  - http://www.lejos.org/p_technologies/nxt/nxj/api/lejos/nxt/Motor.html
+  - [Docs](http://www.lejos.org/p_technologies/nxt/nxj/api/lejos/nxt/Motor.html)
 - MovePilot
-  - http://www.lejos.org/ev3/docs/lejos/robotics/navigation/MovePilot.html
+  - [Docs](http://www.lejos.org/ev3/docs/lejos/robotics/navigation/MovePilot.html)
   - `DifferentialChassis` was renamed to `WheeledChassis`
   - `setRobotSpeed()` was renamed to `setLinearSpeed()` (`setLinearSpeed()`, `setAngularSpeed()`)
 - Navigator
-  - http://www.lejos.org/ev3/docs/lejos/robotics/navigation/Navigator.html
+  - [Docs](http://www.lejos.org/ev3/docs/lejos/robotics/navigation/Navigator.html)
   - Buggy, not working well!
     - Idea: [PoseProvider](http://www.lejos.org/ev3/docs/lejos/robotics/localization/PoseProvider.html)
