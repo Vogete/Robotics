@@ -2,7 +2,10 @@ import lejos.hardware.*;
 import lejos.robotics.chassis.Chassis;
 import lejos.robotics.chassis.Wheel;
 import lejos.robotics.chassis.WheeledChassis;
+import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.navigation.MovePilot;
+import lejos.robotics.navigation.Navigator;
+import lejos.robotics.navigation.Waypoint;
 import lejos.utility.Delay;
 import lejos.hardware.motor.Motor;
 import lejos.utility.Delay;
@@ -15,10 +18,14 @@ public class Assignment1 {
 //		runWithMotorController();
 		
 		/***** MOVEPILOT *****/
-		runWithMovePilotController();
+//		runWithMovePilotController();
+
+		/***** NAVIGATOR *****/
+		runWithNavigator();
+
 	}
 	
-	public static void runWithMotorController() {
+	private static void runWithMotorController() {
 		MotorController.moveForward(500, 6000);
 		try { Thread.sleep(500); } catch(Exception e) {}
 		MotorController.turn(200, 90, "right");
@@ -42,7 +49,7 @@ public class Assignment1 {
 		MotorController.moveForward(300, 6000);
 	}
 	
-	public static void runWithMovePilotController() {
+	private static void runWithMovePilotController() {
 		 
 		Wheel wheel1 = WheeledChassis.modelWheel(Motor.A, 43.2).offset(-64);
 		Wheel wheel2 = WheeledChassis.modelWheel(Motor.B, 43.2).offset(64);
@@ -93,4 +100,26 @@ public class Assignment1 {
 	}
 
 	
+	private static void runWithNavigator() {
+		// TODO!!!! 
+		Wheel wheel1 = WheeledChassis.modelWheel(Motor.A, 43.2).offset(-64);
+		Wheel wheel2 = WheeledChassis.modelWheel(Motor.B, 43.2).offset(64);
+		
+		
+		Chassis chassis = new WheeledChassis(new Wheel[]{wheel1, wheel2}, WheeledChassis.TYPE_DIFFERENTIAL);
+		MovePilot pilot = new MovePilot(chassis);
+		pilot.setLinearSpeed(6000);
+		
+		Navigator navigator = new Navigator(pilot);
+
+		//navigator.rotateTo(90);
+		
+		navigator.goTo(new Waypoint(0, 100));
+//		navigator.addWaypoint(new Waypoint(0, 0));
+//		navigator.addWaypoint(new Waypoint(500, 500));
+		
+//		navigator.followPath();
+	}
+	
 }
+

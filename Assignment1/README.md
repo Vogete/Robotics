@@ -32,10 +32,12 @@ Notes:
 ### LeJos (Java API)
 
 - Motor
-	- http://www.lejos.org/p_technologies/nxt/nxj/api/lejos/nxt/Motor.html
+  - http://www.lejos.org/p_technologies/nxt/nxj/api/lejos/nxt/Motor.html
 - MovePilot
-	- http://www.lejos.org/ev3/docs/lejos/robotics/navigation/MovePilot.html
-	- `DifferentialChassis` was renamed to `WheeledChassis`
-	- `setRobotSpeed()` was renamed to `setLinearSpeed()` (`setLinearSpeed()`, `setAngularSpeed()`)
+  - http://www.lejos.org/ev3/docs/lejos/robotics/navigation/MovePilot.html
+  - `DifferentialChassis` was renamed to `WheeledChassis`
+  - `setRobotSpeed()` was renamed to `setLinearSpeed()` (`setLinearSpeed()`, `setAngularSpeed()`)
 - Navigator
-	- http://www.lejos.org/ev3/docs/lejos/robotics/navigation/Navigator.html
+  - http://www.lejos.org/ev3/docs/lejos/robotics/navigation/Navigator.html
+  - Buggy, not working well!
+    - Idea: [PoseProvider](http://www.lejos.org/ev3/docs/lejos/robotics/localization/PoseProvider.html)
