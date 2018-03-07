@@ -23,6 +23,10 @@
 - Distance: 2585mm
 - https://www.draw.io/#G1TtzG6nARdbF-WI7Pv5NPwUEFM1Ta0G-3
 
+Notes:
+
+- http://ev3lessons.com/resources/wheelconverter/
+
 ## Implementation
 
 ### LeJos (Java API)
@@ -35,6 +39,3 @@
 	- `setRobotSpeed()` was renamed to `setLinearSpeed()` (`setLinearSpeed()`, `setAngularSpeed()`)
 - Navigator
 	- http://www.lejos.org/ev3/docs/lejos/robotics/navigation/Navigator.html
-	
-
-
