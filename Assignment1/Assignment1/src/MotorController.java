@@ -5,7 +5,7 @@ import lejos.hardware.lcd.LCD;
 public class MotorController {
 	
 	private static double wheelDiameter = 43.2;
-	private static double wheelDistanceFromCenter = 63;
+	private static double wheelDistanceFromCenter = 64;
 	private static double wheelWidth = 22;
 	private static int motorOffset = 1;
 	private static double wheelCircumference = wheelDiameter * Math.PI;
@@ -18,8 +18,8 @@ public class MotorController {
 	}
 	
 	public static void moveForward(double distance, int speed) {
-		Motor.A.setAcceleration(acceleration);
-		Motor.B.setAcceleration(acceleration);
+		resetTachoCount();
+		setAccelaration();
 		
 		Motor.A.setSpeed(speed);
 		Motor.B.setSpeed(speed);
@@ -28,8 +28,6 @@ public class MotorController {
 		Motor.B.rotateTo(degree, true);
 		while(Motor.A.isMoving()) Thread.yield();
 		
-		Motor.A.resetTachoCount();
-		Motor.B.resetTachoCount();
 	}
 	
 	private static int calculateDegree(double distance) {
@@ -38,14 +36,15 @@ public class MotorController {
 		return (int)degreeRounded;
 	}
 	
-	public static void turn(double turningDistance, int turningDegree, String direction) {
+	public static void turn(double turningDistance, int turningAngle, String direction) {
+		
 		turningDistance = turningDistance - wheelDistanceFromCenter;
 		int time = 2; //seconds
-		double wheelInnerSpeed = (2 * turningDistance * turningDegree) / (wheelDiameter * time);
-		double wheelOuterSpeed = (2 * turningDegree * (turningDistance + distanceBetweenWheels))/(wheelDiameter * time);
+		double wheelInnerSpeed = (2 * turningDistance * turningAngle) / (wheelDiameter * time);
+		double wheelOuterSpeed = (2 * turningAngle * (turningDistance + distanceBetweenWheels))/(wheelDiameter * time);
 		
-		Motor.A.setAcceleration(acceleration);
-		Motor.B.setAcceleration(acceleration);
+		resetTachoCount();
+		setAccelaration();
 		
 		if(direction == "left") {
 			Motor.A.setSpeed(Math.round(wheelInnerSpeed));
@@ -65,12 +64,34 @@ public class MotorController {
 		Motor.A.stop(true);
 		Motor.B.stop(true);
 		
-		Motor.A.resetTachoCount();
-		Motor.B.resetTachoCount();
 	}
 	
 	
-	public static void rotate(double angle, int speed) {
+	public static void rotate(double rotationAngle, int speed) {
+		resetTachoCount();
+		setAccelaration();
 		
+		Motor.A.setSpeed(speed);
+		Motor.B.setSpeed(speed);
+		
+		double circleCircumference = distanceBetweenWheels * Math.PI;
+		double distance =  circleCircumference / (360 / rotationAngle);
+		int degree = calculateDegree(distance);
+		logMessage(Integer.toString(degree));
+		logMessage(Double.toString(distance));
+		Motor.A.rotateTo(degree, true);
+		Motor.B.rotateTo(-degree, true);
+		while(Motor.A.isMoving()) Thread.yield();
+		
+	}
+	
+	private static void setAccelaration() {
+		Motor.A.setAcceleration(acceleration);
+		Motor.B.setAcceleration(acceleration);
+	}
+	
+	private static void resetTachoCount() {
+		Motor.A.resetTachoCount();
+		Motor.B.resetTachoCount();
 	}
 }
