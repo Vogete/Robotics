@@ -53,7 +53,7 @@ public class MotorController {
 			Motor.A.setSpeed(Math.round(wheelOuterSpeed));
 			Motor.B.setSpeed(Math.round(wheelInnerSpeed));
 		} else {
-			//TODO: refactoring
+			//throw exception
 		}
 		
 		Motor.A.forward();
