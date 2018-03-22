@@ -1,3 +1,4 @@
+import lejos.hardware.motor.Motor;
 
 public class BeepCounterThread extends Thread{
 	public BeepCounterThread() {
@@ -11,7 +12,14 @@ public class BeepCounterThread extends Thread{
 			catch (InterruptedException e) { e.printStackTrace();}
 			
 			synchronized(Main.countLockObject) {
-				Main.beepCounter = 0;
+				if(Main.beepCounter > 5) {
+					Motor.A.setSpeed(100);
+					Motor.B.setSpeed(100);
+					Main.beepCounter = 0;
+				} else {
+					Motor.A.setSpeed(6000);
+					Motor.B.setSpeed(6000);
+				}
 			}
 		}
 	}
