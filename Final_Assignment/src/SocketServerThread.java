@@ -28,17 +28,7 @@ public class SocketServerThread extends Thread {
             }
             
             new SocketMessageThread(clientSocket).start();
-            
-//        	out = new PrintWriter(clientSocket.getOutputStream(), true);
-//        	in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-//        	
-//        	while (true) {
-//        		String message = readMessage();
-//        		out.println(message);
-//        		LCD.clear();
-//        		LCD.drawString(message, 0, 0);
-//        	}
-            
+                        
 		}
 
     }

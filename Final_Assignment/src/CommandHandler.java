@@ -8,7 +8,7 @@ public class CommandHandler {
 	}
 	
 	public void commandDetermination(String command) {
-		MovementHandler movementHandler = new MovementHandler();
+		MovementHandler movementHandler = new MovementHandler();		
 		
 		switch (command) {
 		case "forward":			
@@ -17,7 +17,7 @@ public class CommandHandler {
 			break;
 			
 		case "stop":			
-			movementHandler.stopMovement();
+			movementHandler.stopMovement();		
 			break;
 			
 		case "backward":

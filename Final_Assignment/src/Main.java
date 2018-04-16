@@ -6,6 +6,7 @@ public class Main {
 	static final int PORT = 6666;
 	static String currentCommand;
 
+	
 	static IRSensorThread irThread;
 	static ColorSensorThread colorThread;
 	static LeftUltrasonicSensorThread leftUltrasonicThread;

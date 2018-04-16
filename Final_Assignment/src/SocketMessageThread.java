@@ -40,8 +40,10 @@ public class SocketMessageThread extends Thread {
                 	socket.close();
                     return;
                 } else {
-                	out.println(message);                	
+                	out.println(message);  
+                	LCD.clear();
                 	commandHandler.commandDetermination(message);
+                	LCD.drawString("commandhandler exited", 0, 2);
                 }
             } catch (IOException e) {
                 e.printStackTrace();

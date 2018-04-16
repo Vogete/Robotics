@@ -2,11 +2,10 @@ import lejos.hardware.lcd.LCD;
 import lejos.hardware.motor.Motor;
 import lejos.robotics.RegulatedMotor;
 
-public class MovementHandler {
-	static int speed; 
+public class MovementHandler {	
+	static int speed = 500; 
 	
-	public MovementHandler() {
-		MovementHandler.speed = 6000;
+	public MovementHandler() {	
 		Motor.A.setSpeed(speed);
 		Motor.B.setSpeed(speed);
 		Motor.A.setAcceleration(2000);
@@ -14,29 +13,28 @@ public class MovementHandler {
 		
 	}
 	
-	public void forward() {
+	public void forward() {		
+		LCD.clear();
 		Motor.A.synchronizeWith(new RegulatedMotor[]{Motor.B});
 		Motor.A.startSynchronization();
 		Motor.A.forward();
 		Motor.B.forward();
-		Motor.A.endSynchronization();		
+		Motor.A.endSynchronization();
 	}
 	
 	public void stopMovement() {
-		LCD.drawString("stop1", 0, 0);
-
-		Motor.A.synchronizeWith(new RegulatedMotor[]{Motor.B});
-		Motor.A.startSynchronization();
-		Motor.A.stop();
-		Motor.B.stop();
-		Motor.A.endSynchronization();
-		
-		LCD.drawString("stop2", 0, 1);
+//		Motor.A.synchronizeWith(new RegulatedMotor[]{Motor.B});
+//		Motor.A.startSynchronization();
+		Motor.A.stop(true);
+		Motor.B.stop(true);
+//		Motor.A.endSynchronization();
+				
 	}
 
 	public void reduceMotorSpeed() {
-		Motor.A.setSpeed(Motor.A.getSpeed() - 500);
-		Motor.B.setSpeed(Motor.B.getSpeed() - 500);		
+		MovementHandler.speed -= 50;
+		Motor.A.setSpeed(MovementHandler.speed);
+		Motor.B.setSpeed(MovementHandler.speed);		
 	}
 	
 
@@ -48,5 +46,6 @@ public class MovementHandler {
 		Motor.A.endSynchronization();
 	}
 	
+
 	
 }
