@@ -30,8 +30,8 @@ public class ColorSensorThread extends Thread {
 					
 			Color.RGBtoHSB((int) rgb[0], (int)rgb[1], (int)rgb[2], hsb);
 			
-			//LCD.drawString(Float.toString(hsb[0]) + " " + Float.toString(hsb[1]) + " " + Float.toString(hsb[2]), 0, 0);
-			LCD.drawString(Float.toString(rgb[0]) + " " + Float.toString(rgb[1]) + " " + Float.toString(rgb[2]), 0, 0);
+//			LCD.drawString(Float.toString(hsb[0]) + " " + Float.toString(hsb[1]) + " " + Float.toString(hsb[2]), 0, 0);
+//			LCD.drawString(Float.toString(rgb[0]) + " " + Float.toString(rgb[1]) + " " + Float.toString(rgb[2]), 0, 0);
 		}
 	}
 	
