@@ -16,6 +16,8 @@ public class SocketClientThread {
     private static PrintWriter out;
     private static BufferedReader in;
 
+    public static String response;
+
     public SocketClientThread() {
 
     }
@@ -45,16 +47,16 @@ public class SocketClientThread {
                     try {
                         out.println(msg);
                         out.flush();
-                        String resp = in.readLine();
+                        response = in.readLine();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
             }
         });
-
         sendThread.start();
-        return "test";
+
+        return response;
     }
 
     public static void stopConnection() throws IOException {

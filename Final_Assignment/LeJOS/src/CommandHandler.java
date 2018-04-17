@@ -24,7 +24,7 @@ public class CommandHandler {
 			movementHandler.backward();
 			break;
 			
-		case "slower":	
+		case "slower":
 			movementHandler.reduceMotorSpeed();
 			break;			
 		default:

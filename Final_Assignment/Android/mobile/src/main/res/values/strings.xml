@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Robotics Final Exam</string>
+
+    <!--lejos commands-->
+    <string name="lejos_forward" translatable="false">forward</string>
+    <string name="lejos_stop" translatable="false">stop</string>
+    <string name="lejos_backward" translatable="false">backward</string>
+    <string name="lejos_left" translatable="false">left</string>
+    <string name="lejos_right" translatable="false">right</string>
+    <string name="lejos_endturn" translatable="false">endturn</string>
 </resources>
