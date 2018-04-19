@@ -1,5 +1,7 @@
 package com.zoltanfraknoi.roboticsfinalexam;
 
+import android.app.Activity;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -64,5 +66,7 @@ public class SocketClientThread {
         out.close();
         clientSocket.close();
     }
+
+
 
 }

@@ -28,7 +28,7 @@ public class SocketMessageThread extends Thread {
         
         System.out.println("successful connect");
         
-        String message;
+        String message;        
         
         while (true) {
             try {

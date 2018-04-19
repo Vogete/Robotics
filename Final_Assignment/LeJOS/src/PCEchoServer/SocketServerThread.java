@@ -34,7 +34,7 @@ public class SocketServerThread extends Thread {
                 System.out.println("I/O error: " + e);
             }            
             new SocketMessageThread(clientSocket).start();
-                        
+
 		}
 
     }
