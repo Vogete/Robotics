@@ -12,7 +12,6 @@ public class CommandHandler {
 		
 		switch (command) {
 		case "forward":			
-			
 			movementHandler.forward();
 			break;
 			
@@ -26,7 +25,16 @@ public class CommandHandler {
 			
 		case "slower":
 			movementHandler.reduceMotorSpeed();
-			break;			
+			break;	
+		
+		case "left":
+			movementHandler.turnLeft();
+			break;
+		
+		case "right":
+			movementHandler.turnRight();
+			break;
+			
 		default:
 			break;
 		}

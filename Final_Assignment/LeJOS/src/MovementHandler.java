@@ -46,6 +46,19 @@ public class MovementHandler {
 		Motor.A.endSynchronization();
 	}
 	
-
+	
+	public void turnLeft(){
+		int motorASpeed = Motor.A.getSpeed();
+		int motorBSpeed = Motor.B.getSpeed();
+		Motor.A.setSpeed(motorASpeed/2);
+		forward();
+	}
+	
+	public void turnRight() {
+		int motorASpeed = Motor.A.getSpeed();
+		int motorBSpeed = Motor.B.getSpeed();
+		Motor.B.setSpeed(motorASpeed/2);
+		forward();
+	}
 	
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Android/mobile/src/androidTest/java"/>
+	<classpathentry kind="src" path="Android/mobile/src/main/java"/>
+	<classpathentry kind="src" path="Android/mobile/src/test/java"/>
+	<classpathentry kind="src" path="Android/wear/src/main/java"/>
+	<classpathentry kind="src" path="LeJOS/src"/>
+	<classpathentry kind="lib" path="Android/gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="lib" path="LeJOS/Main.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -28,13 +28,7 @@ public class Main {
 	        String response = socketClientThread.sendMessage(s);
 	        System.out.println("Answer: " + response);
 	        	    	
-		}
-	    
-	    
-
-	    
-	    
-	    
+		} 
 	    
 	}
 
