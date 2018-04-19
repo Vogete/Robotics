@@ -15,7 +15,7 @@ public class Main {
 	static RightUltrasonicSensorThread rightUltrasonicThread;
 	static SocketServerThread socketServerThread;
 	
-	public volatile static String clientCommand;
+	public volatile static String clientCommand = "";
 	public volatile static float irDistance;
 
 

@@ -7,8 +7,8 @@ public class ManualControlBehavior implements Behavior {
 	
 	@Override
 	public boolean takeControl() {
-		LCD.drawString("Cmd:" + Main.clientCommand, 0, 0);
-		if(Main.clientCommand != null) {
+
+		if(Main.clientCommand.equals("")) {
 			return true;
 		}
 		return false;
