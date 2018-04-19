@@ -9,7 +9,8 @@ public class ArbitratorThread extends Thread {
 	
 	public ArbitratorThread() {
 		Behavior manualControlBehavior = new ManualControlBehavior();
-		Behavior[] behaviors = {manualControlBehavior};
+		Behavior avoidObjectBehavior = new AvoidObjectsBehavior();
+		Behavior[] behaviors = {manualControlBehavior, avoidObjectBehavior};
 		arb = new Arbitrator(behaviors);
 		this.setDaemon(true);
 	}

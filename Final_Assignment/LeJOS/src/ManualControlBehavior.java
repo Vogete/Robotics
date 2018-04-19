@@ -7,11 +7,7 @@ public class ManualControlBehavior implements Behavior {
 	
 	@Override
 	public boolean takeControl() {
-
-		if(Main.clientCommand.equals("")) {
-			return true;
-		}
-		return false;
+		return true;
 	}
 
 	@Override
@@ -19,15 +15,19 @@ public class ManualControlBehavior implements Behavior {
     	suppressed = false;
 		String clientCommandCopy = Main.clientCommand;
     	while(!suppressed) {
+    		System.out.println("manual cmd received");
     		if(!clientCommandCopy.equals(Main.clientCommand)) {
     			clientCommandCopy = Main.clientCommand;
-    			CommandHandler.commandDetermination(Main.clientCommand);
+    			System.out.println(clientCommandCopy);
+    			System.out.println(Main.clientCommand);
+    			CommandHandler.commandDetermination(clientCommandCopy);
     		} else {
     			Thread.yield();
     		}
     	}
+    	
     	// ????
-		CommandHandler.commandDetermination("stop");
+		// CommandHandler.commandDetermination("stop");
 		
 	}
 

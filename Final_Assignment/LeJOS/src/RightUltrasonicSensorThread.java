@@ -18,7 +18,7 @@ public class RightUltrasonicSensorThread extends Thread {
 		  while(true){
 		      float [] sample = new float[ultrasonicDistanceProvider.sampleSize()] ;
 		      ultrasonicDistanceProvider.fetchSample(sample, 0);
-		      float rightUltrasonicDistance = sample[0];
+		      Main.rightUltrasonicDistance = sample[0];
 //		      LCD.drawString(Float.toString(rightUltrasonicDistance), 0, 2);
 		  }
 	  }

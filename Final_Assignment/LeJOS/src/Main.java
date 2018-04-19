@@ -17,6 +17,8 @@ public class Main {
 	
 	public volatile static String clientCommand = "";
 	public volatile static float irDistance;
+	public volatile static float rightUltrasonicDistance;
+	public volatile static float leftUltrasonicDistance;
 
 
 	public static void main(String[] args) throws IOException {
@@ -37,7 +39,7 @@ public class Main {
 		socketServerThread.start();
 		
 		
-		//will not get here, put on seperate thread
+		//will not get here, put on separate thread
 		while(!Button.ESCAPE.isDown()){
 			try { Thread.sleep(100); } 
 			catch (InterruptedException e) {
