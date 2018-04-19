@@ -18,7 +18,7 @@ public class IRSensorThread extends Thread {
 		  while(true){
 		      float [] sample = new float[infraRedDistanceProvider.sampleSize()] ;
 		      infraRedDistanceProvider.fetchSample(sample, 0);
-		      float irDistance = sample[0];
+		      Main.irDistance = sample[0];
 //		      LCD.drawString(Float.toString(irDistance), 0, 4);
 		  }
 	  }

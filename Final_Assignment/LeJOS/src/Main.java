@@ -1,17 +1,22 @@
 import java.io.IOException;
 import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
+import lejos.robotics.subsumption.Behavior;
+import lejos.robotics.subsumption.Arbitrator;
 
 public class Main {
 	static final int PORT = 6666;
 	static String currentCommand;
 
-	
+	static ArbitratorThread arbThread;
 	static IRSensorThread irThread;
 	static ColorSensorThread colorThread;
 	static LeftUltrasonicSensorThread leftUltrasonicThread;
 	static RightUltrasonicSensorThread rightUltrasonicThread;
 	static SocketServerThread socketServerThread;
+	
+	public volatile static String clientCommand;
+	public volatile static float irDistance;
 
 
 	public static void main(String[] args) throws IOException {
@@ -19,17 +24,20 @@ public class Main {
 		colorThread = new ColorSensorThread();
 		leftUltrasonicThread = new LeftUltrasonicSensorThread();
 		rightUltrasonicThread = new RightUltrasonicSensorThread();
-		socketServerThread = new SocketServerThread();
 		
-		socketServerThread.start();
 		irThread.start();
 		colorThread.start();
 		leftUltrasonicThread.start();
 		rightUltrasonicThread.start();
 		
-		LCD.clear();
-		LCD.drawString("Server started", 0, 0);
-
+		arbThread = new ArbitratorThread();
+		arbThread.start();
+		
+		socketServerThread = new SocketServerThread();
+		socketServerThread.start();
+		
+		
+		//will not get here, put on seperate thread
 		while(!Button.ESCAPE.isDown()){
 			try { Thread.sleep(100); } 
 			catch (InterruptedException e) {

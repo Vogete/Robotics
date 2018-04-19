@@ -2,12 +2,7 @@ import lejos.hardware.lcd.LCD;
 
 public class CommandHandler {	
 	
-	
-	public CommandHandler() {		
- 
-	}
-	
-	public void commandDetermination(String command) {
+	public static void commandDetermination(String command) {
 		MovementHandler movementHandler = new MovementHandler();		
 		
 		switch (command) {

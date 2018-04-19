@@ -12,11 +12,9 @@ public class SocketMessageThread extends Thread {
     protected Socket socket;
     private PrintWriter out;
     private BufferedReader in;
-    private CommandHandler commandHandler;
     
     public SocketMessageThread(Socket clientSocket) {
     	this.socket = clientSocket;
-    	commandHandler = new CommandHandler();
         this.setDaemon(true);
     }
 
@@ -41,9 +39,8 @@ public class SocketMessageThread extends Thread {
                     return;
                 } else {
                 	out.println(message);  
-                	LCD.clear();
-                	commandHandler.commandDetermination(message);
-                	LCD.drawString("commandhandler exited", 0, 2);
+                	//set volatile variable to whatever client sends
+                	Main.clientCommand = message;
                 }
             } catch (IOException e) {
                 e.printStackTrace();
