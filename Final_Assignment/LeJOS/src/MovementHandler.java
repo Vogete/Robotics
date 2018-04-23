@@ -6,15 +6,18 @@ public class MovementHandler {
 	static int speed = 500; 
 	
 	public MovementHandler() {	
-		Motor.A.setSpeed(speed);
-		Motor.B.setSpeed(speed);
 		Motor.A.setAcceleration(2000);
 		Motor.B.setAcceleration(2000);
 		
 	}
 	
+	public void resetMotorSpeeds() {
+		Motor.A.setSpeed(speed);
+		Motor.B.setSpeed(speed);
+		
+	}
+	
 	public void forward() {		
-		LCD.clear();
 		Motor.A.synchronizeWith(new RegulatedMotor[]{Motor.B});
 		Motor.A.startSynchronization();
 		Motor.A.forward();
@@ -23,22 +26,21 @@ public class MovementHandler {
 	}
 	
 	public void stopMovement() {
-//		Motor.A.synchronizeWith(new RegulatedMotor[]{Motor.B});
-//		Motor.A.startSynchronization();
-		Motor.A.stop(true);
-		Motor.B.stop(true);
-//		Motor.A.endSynchronization();
-				
+		Motor.A.synchronizeWith(new RegulatedMotor[]{Motor.B});
+		Motor.A.startSynchronization();
+		Motor.A.stop();
+		Motor.B.stop();
+		Motor.A.endSynchronization();
+		resetMotorSpeeds();
 	}
 
-	public void reduceMotorSpeed() {
-		MovementHandler.speed -= 50;
-		Motor.A.setSpeed(MovementHandler.speed);
-		Motor.B.setSpeed(MovementHandler.speed);		
+	public void reduceMotorSpeed() {		
+		Motor.A.setSpeed(Main.leftMotorCurrentSpeed - 50);
+		Motor.B.setSpeed(Main.rightMotorCurrentSpeed - 50);		
 	}
 	
 
-	public void backward() {
+	public void backward() {		
 		Motor.A.synchronizeWith(new RegulatedMotor[]{Motor.B});
 		Motor.A.startSynchronization();
 		Motor.A.backward();
@@ -46,19 +48,60 @@ public class MovementHandler {
 		Motor.A.endSynchronization();
 	}
 	
+	public void rotateLeft() {
+		resetMotorSpeeds();
+		Motor.A.synchronizeWith(new RegulatedMotor[]{Motor.B});
+		Motor.A.startSynchronization();
+		Motor.A.backward();
+		Motor.B.forward();
+		Motor.A.endSynchronization();		
+	}
+	
+	public void rotateRight() {
+		resetMotorSpeeds();
+		Motor.A.synchronizeWith(new RegulatedMotor[]{Motor.B});
+		Motor.A.startSynchronization();
+		Motor.A.forward();
+		Motor.B.backward();
+		Motor.A.endSynchronization();
+	}
 	
 	public void turnLeft(){
-		int motorASpeed = Motor.A.getSpeed();
-		int motorBSpeed = Motor.B.getSpeed();
-		Motor.A.setSpeed(motorASpeed/2);
-		forward();
+		
+		if (Main.leftMotorCurrentSpeed > 0) {
+			Motor.A.setSpeed(Main.leftMotorCurrentSpeed/2);
+			forward();
+		} else if (Main.rightMotorCurrentSpeed == 0 && Main.leftMotorCurrentSpeed == 0) {
+			rotateLeft();
+		} else {
+			Motor.A.setSpeed(Main.leftMotorCurrentSpeed/2);
+			backward();
+		}
 	}
 	
 	public void turnRight() {
-		int motorASpeed = Motor.A.getSpeed();
-		int motorBSpeed = Motor.B.getSpeed();
-		Motor.B.setSpeed(motorASpeed/2);
-		forward();
+		Motor.B.setSpeed(Main.rightMotorCurrentSpeed/2);
+		
+		if (Main.movementDirection.equals("F")) {
+			forward();
+		} else if (Main.movementDirection.equals("S")) {
+			rotateRight();
+		} else {
+			backward();
+		}		
+	}
+	
+	public void endTurn() {
+		if (Main.movementDirection.equals("FL") || Main.movementDirection.equals("FR")) {			
+			resetMotorSpeeds();
+			forward();
+		} else if (Main.movementDirection.equals("BL") || Main.movementDirection.equals("BR")) {
+			resetMotorSpeeds();
+			backward();
+		} else {
+			stopMovement();
+		}
+			
 	}
 	
 }

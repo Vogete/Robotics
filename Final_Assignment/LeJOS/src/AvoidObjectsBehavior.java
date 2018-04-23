@@ -4,18 +4,15 @@ import lejos.robotics.subsumption.Behavior;
 public class AvoidObjectsBehavior implements Behavior {
 	
 	private boolean suppressed = false;
-	private int deltaSpeed;
-
+	private MovementHandler mh;
+	
 	@Override
 	public boolean takeControl() {
-		deltaSpeed = getCurrentSpeed();
-		System.out.println("Delta: " + deltaSpeed);
-		
 		if(checkIfIsObjectAhead()) {
-			System.out.println("is object ahead");
+			// System.out.println("is object ahead");
 			return true;
 		} else if (checkIfIsObjectBehind()) {
-			System.out.println("is object behind");
+			//System.out.println("is object behind");
 			return true;
 		}
 		return false;
@@ -23,12 +20,13 @@ public class AvoidObjectsBehavior implements Behavior {
 
 	@Override
 	public void action() {
+		mh = new MovementHandler();
+		
 		suppressed = false;
 		while(!suppressed) {
+			mh.resetMotorSpeeds();
 			if(checkIfIsObjectAhead()) {
-				
 				AvoidObjectAhead();
-				
 			} else if(checkIfIsObjectBehind()) {
 				AvoidObjectBehind();
 			}
@@ -43,39 +41,72 @@ public class AvoidObjectsBehavior implements Behavior {
 		suppressed = true;
 	}
 	
-	private int getCurrentSpeed() {
-		return Motor.A.getRotationSpeed() + Motor.B.getRotationSpeed();
+	private boolean checkIfLeftUltrasonicClose() {
+		return Main.leftUltrasonicDistance <= 0.15;
+	}
+
+	private boolean checkIfRIghtUltrasonicClose() {
+		return Main.rightUltrasonicDistance <= 0.15;
+	}
+
+	private boolean checkIfIsObjectAhead() {		
+		boolean goingForward = Main.movementDirection.equals("F") || Main.movementDirection.equals("FL") || Main.movementDirection.equals("FR");
+		if (goingForward) {
+			return (checkIfLeftUltrasonicClose() || checkIfRIghtUltrasonicClose());			
+		}
+		return false;
 	}
 	
-	private boolean checkIfIsObjectAhead() {
-		deltaSpeed = getCurrentSpeed();
-		return deltaSpeed > 0 && (Main.leftUltrasonicDistance < 0.25 || Main.rightUltrasonicDistance < 0.25);
-	}
-	
-	private boolean checkIfIsObjectBehind() {
-		deltaSpeed = getCurrentSpeed();
-		return deltaSpeed < 0 && Main.irDistance < 25;
+	private boolean checkIfIsObjectBehind() {		
+		boolean goingBack = Main.movementDirection.equals("B") || Main.movementDirection.equals("BL") || Main.movementDirection.equals("BR"); 
+		if ( goingBack ) {
+			return Main.irDistance < 25;	
+		}
+		return false;
 	}
 	
 	private void AvoidObjectAhead(){
+		mh.stopMovement();		
+		
+		if (checkIfLeftUltrasonicClose() && !checkIfRIghtUltrasonicClose()) {
+			mh.turnRight();
+		} else if (!checkIfLeftUltrasonicClose() && checkIfRIghtUltrasonicClose()) {
+			mh.turnLeft();
+		} else {
+			if (!checkIfIsObjectBehind()) {
+				mh.backward();
+			} else {
+				mh.rotateLeft();
+				while (checkIfIsObjectAhead() && checkIfIsObjectBehind()) {
+					Thread.yield();
+				}
+			}
+
+		}
+		
+//		while (checkIfIsObjectAhead()) {
+//			Thread.yield();
+//		}
 		
 	}
 	
-	private void AvoidObjectBehind(){
-		MovementHandler mh = new MovementHandler();
-		mh.stopMovement();
+	private void AvoidObjectBehind(){		
+		mh.stopMovement();		
 		
 		if (!checkIfIsObjectAhead()) {
-			mh.forward();	
+			mh.forward();
 		} else {
-			//rotate in place until there´s clearance ahead or behind
-		}
-		
-		while (checkIfIsObjectBehind()) {
-			if (!checkIfIsObjectAhead()) {
+			mh.rotateLeft();
+			while (checkIfIsObjectAhead() && checkIfIsObjectBehind()) {
 				Thread.yield();
 			}
 		}
+		
+//		while (checkIfIsObjectBehind()) {
+//			if (!checkIfIsObjectAhead()) {
+//				Thread.yield();
+//			}
+//		}
 		
 	}
 
