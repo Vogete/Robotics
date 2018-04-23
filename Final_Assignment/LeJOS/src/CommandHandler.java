@@ -17,7 +17,7 @@ public class CommandHandler {
 		case "backward":
 			movementHandler.backward();
 			break;
-
+			
 		case "slower":
 			movementHandler.reduceMotorSpeed();
 			break;
@@ -25,12 +25,17 @@ public class CommandHandler {
 		case "left":
 			movementHandler.turnLeft();
 			break;
-
+			
 		case "right":
 			movementHandler.turnRight();
 			break;
+			
 		case "endturn":
 			movementHandler.endTurn();
+			break;
+			
+		case "linefollow":
+			Main.searchForLine = true;
 			break;
 
 		default:

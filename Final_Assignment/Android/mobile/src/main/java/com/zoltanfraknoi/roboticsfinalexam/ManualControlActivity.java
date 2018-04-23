@@ -17,7 +17,7 @@ public class ManualControlActivity extends AppCompatActivity {
     Button btnBackward;
     Button btnLeft;
     Button btnRight;
-
+    Button btnEmgStop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,7 @@ public class ManualControlActivity extends AppCompatActivity {
         btnBackward = (Button) findViewById(R.id.btnBackward);
         btnLeft = (Button) findViewById(R.id.btnLeft);
         btnRight = (Button) findViewById(R.id.btnRight);
+        btnEmgStop = (Button) findViewById(R.id.btnRight);
         socketClientThread = new SocketClientThread();
 
 
@@ -67,6 +68,22 @@ public class ManualControlActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void emgStop(View v){
+        try {
+            socketClientThread.sendMessage(getString(R.string.lejos_emgstop));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void btnLine(View v){
+        try {
+            socketClientThread.sendMessage(getString(R.string.lejos_linefollow));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

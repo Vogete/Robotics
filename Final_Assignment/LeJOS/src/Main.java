@@ -23,15 +23,20 @@ public class Main {
 	public volatile static float irDistance;
 	public volatile static float rightUltrasonicDistance;
 	public volatile static float leftUltrasonicDistance;
+	public volatile static float lightSensorValue;
+	
 	
 	public volatile static int leftMotorCurrentSpeed;
 	public volatile static int rightMotorCurrentSpeed;
 	public volatile static String movementDirection;
+	
+	public volatile static boolean searchForLine;
 
 	public static void main(String[] args) throws IOException {
 		movementDirection = "S";
 		leftMotorCurrentSpeed = 0;
 		rightMotorCurrentSpeed = 0;
+		searchForLine = false;
 		
 		motorSpeedThread = new MotorSpeedThread();
 		irThread = new IRSensorThread();

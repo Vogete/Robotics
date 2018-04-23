@@ -98,7 +98,8 @@ public class MovementHandler {
 		} else if (Main.movementDirection.equals("BL") || Main.movementDirection.equals("BR")) {
 			resetMotorSpeeds();
 			backward();
-		} else {
+		} else if (Main.movementDirection.equals("TL") || Main.movementDirection.equals("TR")) {
+			resetMotorSpeeds();
 			stopMovement();
 		}
 			

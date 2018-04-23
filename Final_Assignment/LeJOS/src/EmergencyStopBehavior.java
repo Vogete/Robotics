@@ -18,6 +18,8 @@ public class EmergencyStopBehavior implements Behavior {
 		// TODO Auto-generated method stub
 		MovementHandler mh = new MovementHandler();
 		mh.stopMovement();
+		Main.searchForLine = false;
+		
 		System.out.println("emergency stop");
 		while (!suppressed) {
 			if (Main.leftMotorCurrentSpeed == 0 && Main.rightMotorCurrentSpeed == 0) {

@@ -8,4 +8,6 @@
     <string name="lejos_left" translatable="false">left</string>
     <string name="lejos_right" translatable="false">right</string>
     <string name="lejos_endturn" translatable="false">endturn</string>
+    <string name="lejos_emgstop" translatable="false">emgstop</string>
+    <string name="lejos_linefollow" translatable="false">linefollow</string>
 </resources>

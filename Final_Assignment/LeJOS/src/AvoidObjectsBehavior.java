@@ -90,7 +90,7 @@ public class AvoidObjectsBehavior implements Behavior {
 		
 	}
 	
-	private void AvoidObjectBehind(){		
+	private void AvoidObjectBehind(){
 		mh.stopMovement();		
 		
 		if (!checkIfIsObjectAhead()) {
