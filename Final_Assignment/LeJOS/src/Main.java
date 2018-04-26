@@ -6,7 +6,7 @@ import lejos.robotics.subsumption.Arbitrator;
 
 public class Main {
 	static final int PORT = 6666;
-	static volatile String currentCommand;
+	// static volatile String currentCommand;
 
 	//???
 	static volatile String previousMovementCommand;
@@ -18,6 +18,7 @@ public class Main {
 	static RightUltrasonicSensorThread rightUltrasonicThread;
 	static SocketServerThread socketServerThread;
 	static MotorSpeedThread motorSpeedThread;
+	static BackButtonThread backButtonThread;
 	
 	public volatile static String clientCommand = "";
 	public volatile static float irDistance;
@@ -42,13 +43,15 @@ public class Main {
 		irThread = new IRSensorThread();
 		colorThread = new ColorSensorThread();
 		leftUltrasonicThread = new LeftUltrasonicSensorThread();
-		rightUltrasonicThread = new RightUltrasonicSensorThread();		
+		rightUltrasonicThread = new RightUltrasonicSensorThread();	
+		backButtonThread = new BackButtonThread();
 		
 		motorSpeedThread.start();
 		irThread.start();
 		colorThread.start();
 		leftUltrasonicThread.start();
-		rightUltrasonicThread.start();		
+		rightUltrasonicThread.start();
+		backButtonThread.start();
 		
 		arbThread = new ArbitratorThread();
 		arbThread.start();
@@ -57,14 +60,7 @@ public class Main {
 		socketServerThread.start();
 		
 		
-		//will not get here, put on separate thread
-		while(!Button.ESCAPE.isDown()){
-			try { Thread.sleep(100); } 
-			catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			
-		}
+
 	      
 	}
 

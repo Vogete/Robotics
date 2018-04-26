@@ -20,7 +20,7 @@ public class EmergencyStopBehavior implements Behavior {
 		mh.stopMovement();
 		Main.searchForLine = false;
 		
-		System.out.println("emergency stop");
+		// System.out.println("emergency stop");
 		while (!suppressed) {
 			if (Main.leftMotorCurrentSpeed == 0 && Main.rightMotorCurrentSpeed == 0) {
 				suppressed = true;

@@ -48,6 +48,10 @@ public class AvoidObjectsBehavior implements Behavior {
 	private boolean checkIfRIghtUltrasonicClose() {
 		return Main.rightUltrasonicDistance <= 0.15;
 	}
+	
+	private boolean checkIfIRSensorClose() {
+		return Main.irDistance < 25 ;
+	}
 
 	private boolean checkIfIsObjectAhead() {		
 		boolean goingForward = Main.movementDirection.equals("F") || Main.movementDirection.equals("FL") || Main.movementDirection.equals("FR");
@@ -60,7 +64,7 @@ public class AvoidObjectsBehavior implements Behavior {
 	private boolean checkIfIsObjectBehind() {		
 		boolean goingBack = Main.movementDirection.equals("B") || Main.movementDirection.equals("BL") || Main.movementDirection.equals("BR"); 
 		if ( goingBack ) {
-			return Main.irDistance < 25;	
+			return checkIfIRSensorClose();	
 		}
 		return false;
 	}
@@ -69,24 +73,26 @@ public class AvoidObjectsBehavior implements Behavior {
 		mh.stopMovement();		
 		
 		if (checkIfLeftUltrasonicClose() && !checkIfRIghtUltrasonicClose()) {
-			mh.turnRight();
+//			mh.turnRight();
+			mh.rotateRight();
 		} else if (!checkIfLeftUltrasonicClose() && checkIfRIghtUltrasonicClose()) {
-			mh.turnLeft();
+//			mh.turnLeft();
+			mh.rotateLeft();
 		} else {
 			if (!checkIfIsObjectBehind()) {
 				mh.backward();
 			} else {
 				mh.rotateLeft();
-				while (checkIfIsObjectAhead() && checkIfIsObjectBehind()) {
+				while ( (checkIfLeftUltrasonicClose() || checkIfRIghtUltrasonicClose()) && checkIfIsObjectBehind() ) {
 					Thread.yield();
 				}
 			}
 
 		}
 		
-//		while (checkIfIsObjectAhead()) {
-//			Thread.yield();
-//		}
+		while (checkIfLeftUltrasonicClose() || checkIfRIghtUltrasonicClose()) {
+			Thread.yield();
+		}
 		
 	}
 	
@@ -102,11 +108,11 @@ public class AvoidObjectsBehavior implements Behavior {
 			}
 		}
 		
-//		while (checkIfIsObjectBehind()) {
-//			if (!checkIfIsObjectAhead()) {
-//				Thread.yield();
-//			}
-//		}
+		while (checkIfIsObjectBehind()) {
+			if (!checkIfIsObjectAhead()) {
+				Thread.yield();
+			}
+		}
 		
 	}
 

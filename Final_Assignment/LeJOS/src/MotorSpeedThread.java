@@ -1,3 +1,4 @@
+import lejos.hardware.lcd.LCD;
 import lejos.hardware.motor.Motor;
 import lejos.robotics.RegulatedMotor;
 
@@ -9,7 +10,9 @@ public class MotorSpeedThread extends Thread {
 	public void run() {
 		while (true) {
 			getCurrentMotorSpeeds();
-			Main.movementDirection = getCurrentDirection();
+			Main.movementDirection = getCurrentDirection();			
+//			LCD.clear();
+//			LCD.drawString(Main.movementDirection, 0, 4);
 		}
 	
 	}
@@ -44,8 +47,10 @@ public class MotorSpeedThread extends Thread {
 			} else if (Main.leftMotorCurrentSpeed > 0 && Main.rightMotorCurrentSpeed < 0) {
 				return "TR";
 			}
+			
 			return "S";
 		}
+				
 				
 	}
 }
